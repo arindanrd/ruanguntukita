@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/ladang_0.js"></script>
+        <script src="data/pesisir_1.js"></script>
+        <script src="data/tanam_2.js"></script>
+        <script src="data/sawah_cilacap_3.js"></script>
+        <script src="data/kebun_clp_4.js"></script>
+        <script src="data/cilacap_kota_5.js"></script>
+        <script src="data/rth_cilacap_kota_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-7.74706585907,108.952774928],[-7.68309973592,109.08411233]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        function pop_ladang_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? Autolinker.link(String(feature.properties['gid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_cilaca'] !== null ? Autolinker.link(String(feature.properties['fid_cilaca'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdppum'] !== null ? Autolinker.link(String(feature.properties['kdppum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj'] !== null ? Autolinker.link(String(feature.properties['namobj'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark'] !== null ? Autolinker.link(String(feature.properties['remark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdpbps'] !== null ? Autolinker.link(String(feature.properties['kdpbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode'] !== null ? Autolinker.link(String(feature.properties['fcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['luaswh'] !== null ? Autolinker.link(String(feature.properties['luaswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['uupp'] !== null ? Autolinker.link(String(feature.properties['uupp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id'] !== null ? Autolinker.link(String(feature.properties['srs_id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode'] !== null ? Autolinker.link(String(feature.properties['lcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata'] !== null ? Autolinker.link(String(feature.properties['metadata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdebps'] !== null ? Autolinker.link(String(feature.properties['kdebps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdepum'] !== null ? Autolinker.link(String(feature.properties['kdepum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcbps'] !== null ? Autolinker.link(String(feature.properties['kdcbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcpum'] !== null ? Autolinker.link(String(feature.properties['kdcpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbbps'] !== null ? Autolinker.link(String(feature.properties['kdbbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbpum'] !== null ? Autolinker.link(String(feature.properties['kdbpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkd'] !== null ? Autolinker.link(String(feature.properties['wadmkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkd'] !== null ? Autolinker.link(String(feature.properties['wiadkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkc'] !== null ? Autolinker.link(String(feature.properties['wadmkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkc'] !== null ? Autolinker.link(String(feature.properties['wiadkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkk'] !== null ? Autolinker.link(String(feature.properties['wadmkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkk'] !== null ? Autolinker.link(String(feature.properties['wiadkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmpr'] !== null ? Autolinker.link(String(feature.properties['wadmpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadpr'] !== null ? Autolinker.link(String(feature.properties['wiadpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipadm'] !== null ? Autolinker.link(String(feature.properties['tipadm'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_leng'] !== null ? Autolinker.link(String(feature.properties['shape_leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_area'] !== null ? Autolinker.link(String(feature.properties['shape_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_agrila'] !== null ? Autolinker.link(String(feature.properties['fid_agrila'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj_1'] !== null ? Autolinker.link(String(feature.properties['namobj_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode_1'] !== null ? Autolinker.link(String(feature.properties['fcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark_1'] !== null ? Autolinker.link(String(feature.properties['remark_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['aqdate'] !== null ? Autolinker.link(String(feature.properties['aqdate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pudate'] !== null ? Autolinker.link(String(feature.properties['pudate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kodlco'] !== null ? Autolinker.link(String(feature.properties['kodlco'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id_1'] !== null ? Autolinker.link(String(feature.properties['srs_id_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode_1'] !== null ? Autolinker.link(String(feature.properties['lcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata_1'] !== null ? Autolinker.link(String(feature.properties['metadata_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['jnsldg'] !== null ? Autolinker.link(String(feature.properties['jnsldg'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tnmldg'] !== null ? Autolinker.link(String(feature.properties['tnmldg'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipldg'] !== null ? Autolinker.link(String(feature.properties['tipldg'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_le_1'] !== null ? Autolinker.link(String(feature.properties['shape_le_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_ar_1'] !== null ? Autolinker.link(String(feature.properties['shape_ar_1'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ladang_0_0() {
+            return {
+                pane: 'pane_ladang_0',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(186,221,105,1.0)',
+            }
+        }
+        map.createPane('pane_ladang_0');
+        map.getPane('pane_ladang_0').style.zIndex = 400;
+        map.getPane('pane_ladang_0').style['mix-blend-mode'] = 'normal';
+        var layer_ladang_0 = new L.geoJson(json_ladang_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_ladang_0',
+            onEachFeature: pop_ladang_0,
+            style: style_ladang_0_0,
+        });
+        bounds_group.addLayer(layer_ladang_0);
+        map.addLayer(layer_ladang_0);
+        function pop_pesisir_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? Autolinker.link(String(feature.properties['gid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_pesisi'] !== null ? Autolinker.link(String(feature.properties['fid_pesisi'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj'] !== null ? Autolinker.link(String(feature.properties['namobj'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode'] !== null ? Autolinker.link(String(feature.properties['fcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tippss'] !== null ? Autolinker.link(String(feature.properties['tippss'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['stapss'] !== null ? Autolinker.link(String(feature.properties['stapss'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['jnspan'] !== null ? Autolinker.link(String(feature.properties['jnspan'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark'] !== null ? Autolinker.link(String(feature.properties['remark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id'] !== null ? Autolinker.link(String(feature.properties['srs_id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode'] !== null ? Autolinker.link(String(feature.properties['lcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata'] !== null ? Autolinker.link(String(feature.properties['metadata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_leng'] !== null ? Autolinker.link(String(feature.properties['shape_leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_area'] !== null ? Autolinker.link(String(feature.properties['shape_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_cilaca'] !== null ? Autolinker.link(String(feature.properties['fid_cilaca'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdppum'] !== null ? Autolinker.link(String(feature.properties['kdppum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj_1'] !== null ? Autolinker.link(String(feature.properties['namobj_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark_1'] !== null ? Autolinker.link(String(feature.properties['remark_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdpbps'] !== null ? Autolinker.link(String(feature.properties['kdpbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode_1'] !== null ? Autolinker.link(String(feature.properties['fcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['luaswh'] !== null ? Autolinker.link(String(feature.properties['luaswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['uupp'] !== null ? Autolinker.link(String(feature.properties['uupp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id_1'] !== null ? Autolinker.link(String(feature.properties['srs_id_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode_1'] !== null ? Autolinker.link(String(feature.properties['lcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata_1'] !== null ? Autolinker.link(String(feature.properties['metadata_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdebps'] !== null ? Autolinker.link(String(feature.properties['kdebps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdepum'] !== null ? Autolinker.link(String(feature.properties['kdepum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcbps'] !== null ? Autolinker.link(String(feature.properties['kdcbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcpum'] !== null ? Autolinker.link(String(feature.properties['kdcpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbbps'] !== null ? Autolinker.link(String(feature.properties['kdbbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbpum'] !== null ? Autolinker.link(String(feature.properties['kdbpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkd'] !== null ? Autolinker.link(String(feature.properties['wadmkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkd'] !== null ? Autolinker.link(String(feature.properties['wiadkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkc'] !== null ? Autolinker.link(String(feature.properties['wadmkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkc'] !== null ? Autolinker.link(String(feature.properties['wiadkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkk'] !== null ? Autolinker.link(String(feature.properties['wadmkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkk'] !== null ? Autolinker.link(String(feature.properties['wiadkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmpr'] !== null ? Autolinker.link(String(feature.properties['wadmpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadpr'] !== null ? Autolinker.link(String(feature.properties['wiadpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipadm'] !== null ? Autolinker.link(String(feature.properties['tipadm'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_le_1'] !== null ? Autolinker.link(String(feature.properties['shape_le_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_ar_1'] !== null ? Autolinker.link(String(feature.properties['shape_ar_1'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_pesisir_1_0() {
+            return {
+                pane: 'pane_pesisir_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,132,157,0.619607843137)',
+            }
+        }
+        map.createPane('pane_pesisir_1');
+        map.getPane('pane_pesisir_1').style.zIndex = 401;
+        map.getPane('pane_pesisir_1').style['mix-blend-mode'] = 'normal';
+        var layer_pesisir_1 = new L.geoJson(json_pesisir_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_pesisir_1',
+            onEachFeature: pop_pesisir_1,
+            style: style_pesisir_1_0,
+        });
+        bounds_group.addLayer(layer_pesisir_1);
+        map.addLayer(layer_pesisir_1);
+        function pop_tanam_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? Autolinker.link(String(feature.properties['gid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_agrita'] !== null ? Autolinker.link(String(feature.properties['fid_agrita'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj'] !== null ? Autolinker.link(String(feature.properties['namobj'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark'] !== null ? Autolinker.link(String(feature.properties['remark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['aqdate'] !== null ? Autolinker.link(String(feature.properties['aqdate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pudate'] !== null ? Autolinker.link(String(feature.properties['pudate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode'] !== null ? Autolinker.link(String(feature.properties['fcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kodlco'] !== null ? Autolinker.link(String(feature.properties['kodlco'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id'] !== null ? Autolinker.link(String(feature.properties['srs_id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode'] !== null ? Autolinker.link(String(feature.properties['lcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata'] !== null ? Autolinker.link(String(feature.properties['metadata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['jnsswh'] !== null ? Autolinker.link(String(feature.properties['jnsswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_leng'] !== null ? Autolinker.link(String(feature.properties['shape_leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_area'] !== null ? Autolinker.link(String(feature.properties['shape_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_cilaca'] !== null ? Autolinker.link(String(feature.properties['fid_cilaca'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdppum'] !== null ? Autolinker.link(String(feature.properties['kdppum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj_1'] !== null ? Autolinker.link(String(feature.properties['namobj_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark_1'] !== null ? Autolinker.link(String(feature.properties['remark_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdpbps'] !== null ? Autolinker.link(String(feature.properties['kdpbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode_1'] !== null ? Autolinker.link(String(feature.properties['fcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['luaswh'] !== null ? Autolinker.link(String(feature.properties['luaswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['uupp'] !== null ? Autolinker.link(String(feature.properties['uupp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id_1'] !== null ? Autolinker.link(String(feature.properties['srs_id_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode_1'] !== null ? Autolinker.link(String(feature.properties['lcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata_1'] !== null ? Autolinker.link(String(feature.properties['metadata_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdebps'] !== null ? Autolinker.link(String(feature.properties['kdebps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdepum'] !== null ? Autolinker.link(String(feature.properties['kdepum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcbps'] !== null ? Autolinker.link(String(feature.properties['kdcbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcpum'] !== null ? Autolinker.link(String(feature.properties['kdcpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbbps'] !== null ? Autolinker.link(String(feature.properties['kdbbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbpum'] !== null ? Autolinker.link(String(feature.properties['kdbpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkd'] !== null ? Autolinker.link(String(feature.properties['wadmkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkd'] !== null ? Autolinker.link(String(feature.properties['wiadkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkc'] !== null ? Autolinker.link(String(feature.properties['wadmkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkc'] !== null ? Autolinker.link(String(feature.properties['wiadkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkk'] !== null ? Autolinker.link(String(feature.properties['wadmkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkk'] !== null ? Autolinker.link(String(feature.properties['wiadkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmpr'] !== null ? Autolinker.link(String(feature.properties['wadmpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadpr'] !== null ? Autolinker.link(String(feature.properties['wiadpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipadm'] !== null ? Autolinker.link(String(feature.properties['tipadm'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_le_1'] !== null ? Autolinker.link(String(feature.properties['shape_le_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_ar_1'] !== null ? Autolinker.link(String(feature.properties['shape_ar_1'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_tanam_2_0() {
+            return {
+                pane: 'pane_tanam_2',
+                opacity: 1,
+                color: 'rgba(175,179,138,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(186,221,105,1.0)',
+            }
+        }
+        function style_tanam_2_1() {
+            return {
+                pane: 'pane_tanam_2',
+            }
+        }
+        map.createPane('pane_tanam_2');
+        map.getPane('pane_tanam_2').style.zIndex = 402;
+        map.getPane('pane_tanam_2').style['mix-blend-mode'] = 'normal';
+        var layer_tanam_2 = new L.geoJson.multiStyle(json_tanam_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_tanam_2',
+            onEachFeature: pop_tanam_2,
+            styles: [style_tanam_2_0,style_tanam_2_1,]
+        });
+        bounds_group.addLayer(layer_tanam_2);
+        map.addLayer(layer_tanam_2);
+        function pop_sawah_cilacap_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? Autolinker.link(String(feature.properties['gid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_agrisa'] !== null ? Autolinker.link(String(feature.properties['fid_agrisa'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj'] !== null ? Autolinker.link(String(feature.properties['namobj'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['jnsswh'] !== null ? Autolinker.link(String(feature.properties['jnsswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode'] !== null ? Autolinker.link(String(feature.properties['fcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['aqdate'] !== null ? Autolinker.link(String(feature.properties['aqdate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pudate'] !== null ? Autolinker.link(String(feature.properties['pudate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark'] !== null ? Autolinker.link(String(feature.properties['remark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kodlco'] !== null ? Autolinker.link(String(feature.properties['kodlco'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id'] !== null ? Autolinker.link(String(feature.properties['srs_id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode'] !== null ? Autolinker.link(String(feature.properties['lcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata'] !== null ? Autolinker.link(String(feature.properties['metadata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tnmswh'] !== null ? Autolinker.link(String(feature.properties['tnmswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_leng'] !== null ? Autolinker.link(String(feature.properties['shape_leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_area'] !== null ? Autolinker.link(String(feature.properties['shape_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_cilaca'] !== null ? Autolinker.link(String(feature.properties['fid_cilaca'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdppum'] !== null ? Autolinker.link(String(feature.properties['kdppum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj_1'] !== null ? Autolinker.link(String(feature.properties['namobj_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark_1'] !== null ? Autolinker.link(String(feature.properties['remark_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdpbps'] !== null ? Autolinker.link(String(feature.properties['kdpbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode_1'] !== null ? Autolinker.link(String(feature.properties['fcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['luaswh'] !== null ? Autolinker.link(String(feature.properties['luaswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['uupp'] !== null ? Autolinker.link(String(feature.properties['uupp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id_1'] !== null ? Autolinker.link(String(feature.properties['srs_id_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode_1'] !== null ? Autolinker.link(String(feature.properties['lcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata_1'] !== null ? Autolinker.link(String(feature.properties['metadata_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdebps'] !== null ? Autolinker.link(String(feature.properties['kdebps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdepum'] !== null ? Autolinker.link(String(feature.properties['kdepum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcbps'] !== null ? Autolinker.link(String(feature.properties['kdcbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcpum'] !== null ? Autolinker.link(String(feature.properties['kdcpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbbps'] !== null ? Autolinker.link(String(feature.properties['kdbbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbpum'] !== null ? Autolinker.link(String(feature.properties['kdbpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkd'] !== null ? Autolinker.link(String(feature.properties['wadmkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkd'] !== null ? Autolinker.link(String(feature.properties['wiadkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkc'] !== null ? Autolinker.link(String(feature.properties['wadmkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkc'] !== null ? Autolinker.link(String(feature.properties['wiadkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkk'] !== null ? Autolinker.link(String(feature.properties['wadmkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkk'] !== null ? Autolinker.link(String(feature.properties['wiadkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmpr'] !== null ? Autolinker.link(String(feature.properties['wadmpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadpr'] !== null ? Autolinker.link(String(feature.properties['wiadpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipadm'] !== null ? Autolinker.link(String(feature.properties['tipadm'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_le_1'] !== null ? Autolinker.link(String(feature.properties['shape_le_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_ar_1'] !== null ? Autolinker.link(String(feature.properties['shape_ar_1'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_sawah_cilacap_3_0() {
+            return {
+                pane: 'pane_sawah_cilacap_3',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(186,221,105,1.0)',
+            }
+        }
+        function style_sawah_cilacap_3_1() {
+            return {
+                pane: 'pane_sawah_cilacap_3',
+            }
+        }
+        map.createPane('pane_sawah_cilacap_3');
+        map.getPane('pane_sawah_cilacap_3').style.zIndex = 403;
+        map.getPane('pane_sawah_cilacap_3').style['mix-blend-mode'] = 'normal';
+        var layer_sawah_cilacap_3 = new L.geoJson.multiStyle(json_sawah_cilacap_3, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_sawah_cilacap_3',
+            onEachFeature: pop_sawah_cilacap_3,
+            styles: [style_sawah_cilacap_3_0,style_sawah_cilacap_3_1,]
+        });
+        bounds_group.addLayer(layer_sawah_cilacap_3);
+        map.addLayer(layer_sawah_cilacap_3);
+        function pop_kebun_clp_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? Autolinker.link(String(feature.properties['gid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_agrike'] !== null ? Autolinker.link(String(feature.properties['fid_agrike'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj'] !== null ? Autolinker.link(String(feature.properties['namobj'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['jnskbn'] !== null ? Autolinker.link(String(feature.properties['jnskbn'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode'] !== null ? Autolinker.link(String(feature.properties['fcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pudate'] !== null ? Autolinker.link(String(feature.properties['pudate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['aqdate'] !== null ? Autolinker.link(String(feature.properties['aqdate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark'] !== null ? Autolinker.link(String(feature.properties['remark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kodlco'] !== null ? Autolinker.link(String(feature.properties['kodlco'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id'] !== null ? Autolinker.link(String(feature.properties['srs_id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode'] !== null ? Autolinker.link(String(feature.properties['lcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata'] !== null ? Autolinker.link(String(feature.properties['metadata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_leng'] !== null ? Autolinker.link(String(feature.properties['shape_leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_area'] !== null ? Autolinker.link(String(feature.properties['shape_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid_cilaca'] !== null ? Autolinker.link(String(feature.properties['fid_cilaca'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdppum'] !== null ? Autolinker.link(String(feature.properties['kdppum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj_1'] !== null ? Autolinker.link(String(feature.properties['namobj_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark_1'] !== null ? Autolinker.link(String(feature.properties['remark_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdpbps'] !== null ? Autolinker.link(String(feature.properties['kdpbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode_1'] !== null ? Autolinker.link(String(feature.properties['fcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['luaswh'] !== null ? Autolinker.link(String(feature.properties['luaswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['uupp'] !== null ? Autolinker.link(String(feature.properties['uupp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id_1'] !== null ? Autolinker.link(String(feature.properties['srs_id_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode_1'] !== null ? Autolinker.link(String(feature.properties['lcode_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata_1'] !== null ? Autolinker.link(String(feature.properties['metadata_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdebps'] !== null ? Autolinker.link(String(feature.properties['kdebps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdepum'] !== null ? Autolinker.link(String(feature.properties['kdepum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcbps'] !== null ? Autolinker.link(String(feature.properties['kdcbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcpum'] !== null ? Autolinker.link(String(feature.properties['kdcpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbbps'] !== null ? Autolinker.link(String(feature.properties['kdbbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbpum'] !== null ? Autolinker.link(String(feature.properties['kdbpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkd'] !== null ? Autolinker.link(String(feature.properties['wadmkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkd'] !== null ? Autolinker.link(String(feature.properties['wiadkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkc'] !== null ? Autolinker.link(String(feature.properties['wadmkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkc'] !== null ? Autolinker.link(String(feature.properties['wiadkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkk'] !== null ? Autolinker.link(String(feature.properties['wadmkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkk'] !== null ? Autolinker.link(String(feature.properties['wiadkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmpr'] !== null ? Autolinker.link(String(feature.properties['wadmpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadpr'] !== null ? Autolinker.link(String(feature.properties['wiadpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipadm'] !== null ? Autolinker.link(String(feature.properties['tipadm'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_le_1'] !== null ? Autolinker.link(String(feature.properties['shape_le_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_ar_1'] !== null ? Autolinker.link(String(feature.properties['shape_ar_1'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_kebun_clp_4_0() {
+            return {
+                pane: 'pane_kebun_clp_4',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(186,221,105,1.0)',
+            }
+        }
+        function style_kebun_clp_4_1() {
+            return {
+                pane: 'pane_kebun_clp_4',
+            }
+        }
+        map.createPane('pane_kebun_clp_4');
+        map.getPane('pane_kebun_clp_4').style.zIndex = 404;
+        map.getPane('pane_kebun_clp_4').style['mix-blend-mode'] = 'normal';
+        var layer_kebun_clp_4 = new L.geoJson.multiStyle(json_kebun_clp_4, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_kebun_clp_4',
+            onEachFeature: pop_kebun_clp_4,
+            styles: [style_kebun_clp_4_0,style_kebun_clp_4_1,]
+        });
+        bounds_group.addLayer(layer_kebun_clp_4);
+        map.addLayer(layer_kebun_clp_4);
+        function pop_cilacap_kota_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? Autolinker.link(String(feature.properties['gid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdppum'] !== null ? Autolinker.link(String(feature.properties['kdppum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['namobj'] !== null ? Autolinker.link(String(feature.properties['namobj'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['remark'] !== null ? Autolinker.link(String(feature.properties['remark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdpbps'] !== null ? Autolinker.link(String(feature.properties['kdpbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fcode'] !== null ? Autolinker.link(String(feature.properties['fcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['luaswh'] !== null ? Autolinker.link(String(feature.properties['luaswh'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['uupp'] !== null ? Autolinker.link(String(feature.properties['uupp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['srs_id'] !== null ? Autolinker.link(String(feature.properties['srs_id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['lcode'] !== null ? Autolinker.link(String(feature.properties['lcode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['metadata'] !== null ? Autolinker.link(String(feature.properties['metadata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdebps'] !== null ? Autolinker.link(String(feature.properties['kdebps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdepum'] !== null ? Autolinker.link(String(feature.properties['kdepum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcbps'] !== null ? Autolinker.link(String(feature.properties['kdcbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdcpum'] !== null ? Autolinker.link(String(feature.properties['kdcpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbbps'] !== null ? Autolinker.link(String(feature.properties['kdbbps'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kdbpum'] !== null ? Autolinker.link(String(feature.properties['kdbpum'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkd'] !== null ? Autolinker.link(String(feature.properties['wadmkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkd'] !== null ? Autolinker.link(String(feature.properties['wiadkd'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkc'] !== null ? Autolinker.link(String(feature.properties['wadmkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkc'] !== null ? Autolinker.link(String(feature.properties['wiadkc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmkk'] !== null ? Autolinker.link(String(feature.properties['wadmkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadkk'] !== null ? Autolinker.link(String(feature.properties['wiadkk'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wadmpr'] !== null ? Autolinker.link(String(feature.properties['wadmpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['wiadpr'] !== null ? Autolinker.link(String(feature.properties['wiadpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipadm'] !== null ? Autolinker.link(String(feature.properties['tipadm'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_leng'] !== null ? Autolinker.link(String(feature.properties['shape_leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['shape_area'] !== null ? Autolinker.link(String(feature.properties['shape_area'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_cilacap_kota_5_0() {
+            return {
+                pane: 'pane_cilacap_kota_5',
+                opacity: 1,
+                color: 'rgba(6,7,6,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(166,193,222,0.0)',
+            }
+        }
+        map.createPane('pane_cilacap_kota_5');
+        map.getPane('pane_cilacap_kota_5').style.zIndex = 405;
+        map.getPane('pane_cilacap_kota_5').style['mix-blend-mode'] = 'normal';
+        var layer_cilacap_kota_5 = new L.geoJson(json_cilacap_kota_5, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_cilacap_kota_5',
+            onEachFeature: pop_cilacap_kota_5,
+            style: style_cilacap_kota_5_0,
+        });
+        bounds_group.addLayer(layer_cilacap_kota_5);
+        map.addLayer(layer_cilacap_kota_5);
+        function pop_rth_cilacap_kota_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? Autolinker.link(String(feature.properties['gid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['waktu'] !== null ? Autolinker.link(String(feature.properties['waktu'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nama_rth'] !== null ? Autolinker.link(String(feature.properties['nama_rth'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['jenis_rth'] !== null ? Autolinker.link(String(feature.properties['jenis_rth'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fasilitas'] !== null ? Autolinker.link(String(feature.properties['fasilitas'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['vegetasi'] !== null ? Autolinker.link(String(feature.properties['vegetasi'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['foto'] !== null ? Autolinker.link(String(feature.properties['foto'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_rth_cilacap_kota_6_0() {
+            return {
+                pane: 'pane_rth_cilacap_kota_6',
+                radius: 18.19354,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 5.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(10,0,0,1.0)',
+            }
+        }
+        function style_rth_cilacap_kota_6_1() {
+            return {
+                pane: 'pane_rth_cilacap_kota_6',
+                radius: 20.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,160,44,1.0)',
+            }
+        }
+        map.createPane('pane_rth_cilacap_kota_6');
+        map.getPane('pane_rth_cilacap_kota_6').style.zIndex = 406;
+        map.getPane('pane_rth_cilacap_kota_6').style['mix-blend-mode'] = 'normal';
+        var layer_rth_cilacap_kota_6 = new L.geoJson.multiStyle(json_rth_cilacap_kota_6, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_rth_cilacap_kota_6',
+            onEachFeature: pop_rth_cilacap_kota_6,
+            pointToLayers: [function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_rth_cilacap_kota_6_0(feature));
+            },function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_rth_cilacap_kota_6_1(feature));
+            },
+        ]});
+        bounds_group.addLayer(layer_rth_cilacap_kota_6);
+        map.addLayer(layer_rth_cilacap_kota_6);
+        setBounds();
+        </script>
+    </body>
+</html>
